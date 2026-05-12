@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-card-hover: var(--card-hover);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-foreground-strong: var(--foreground-strong);
+  --shadow-composer: 0 0 0 1px rgba(37, 43, 54, 0.6), 0 4px 24px rgba(0, 0, 0, 0.3);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #0d0f12;
+  color: #f3f4f6;
+  --radius: 0.75rem;
+  --background: #0d0f12;
+  --foreground: #f3f4f6;
+  --foreground-strong: #ffffff;
+  --card: #151922;
+  --card-hover: #1a1f2a;
+  --card-foreground: #f3f4f6;
+  --popover: #151922;
+  --popover-foreground: #f3f4f6;
+  --primary: #10a37f;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1f2a;
+  --secondary-foreground: #f3f4f6;
+  --muted: #6b7280;
+  --muted-foreground: #9ca3af;
+  --accent: #1a1f2a;
+  --accent-foreground: #f3f4f6;
+  --destructive: #ef4444;
+  --destructive-subtle: rgba(239, 68, 68, 0.12);
+  --border: #252b36;
+  --input: #252b36;
+  --ring: #10a37f;
+  --surface: #111418;
+  --surface-elevated: #151922;
+  --surface-overlay: rgba(13, 15, 18, 0.85);
+  --success: #10a37f;
+  --success-subtle: rgba(16, 163, 127, 0.12);
+  --success-foreground: #f3f4f6;
+  --warning: #f59e0b;
+  --warning-subtle: rgba(245, 158, 11, 0.12);
+  --warning-foreground: #f3f4f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
+  background: #0d0f12;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(16, 163, 127, 0.5);
+  outline-offset: 2px;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+::selection {
+  background: rgba(16, 163, 127, 0.25);
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.25);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
