@@ -148,14 +148,22 @@ async function firebaseCleanup() {
         })
 
         if (keptAttachments.length !== attachments.length && msg.userId === currentUid) {
-          deletePromises.push(
-            set(ref(db, `messages/${roomId}/${msgId}`), {
-              ...msg,
-              attachments:
-                keptAttachments.length > 0 ? keptAttachments : null,
-              id: undefined,
-            }),
-          )
+          if (keptAttachments.length === 0 && !msg.text.trim()) {
+            deletePromises.push(
+              set(ref(db, `messages/${roomId}/${msgId}`), null).catch(
+                () => undefined,
+              ),
+            )
+          } else {
+            deletePromises.push(
+              set(ref(db, `messages/${roomId}/${msgId}`), {
+                ...msg,
+                attachments:
+                  keptAttachments.length > 0 ? keptAttachments : null,
+                id: undefined,
+              }),
+            )
+          }
         }
 
         for (const att of keptAttachments) {
@@ -277,6 +285,8 @@ async function demoCleanup() {
       }
       return true
     })
+
+    if (keptAttachments.length === 0 && !msg.text.trim()) continue
 
     keptMessages.push({
       ...msg,

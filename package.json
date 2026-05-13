@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "SmartIoT Chat: a frontend-only realtime support and IoT alerts chat demo built with React, Firebase, and GitHub Pages.",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "vite",
     "test": "vitest run",
@@ -30,6 +34,9 @@
     "@eslint/js": "^9.0.0",
     "@google/design.md": "^0.1.1",
     "@tailwindcss/vite": "^4.3.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^25.6.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -39,6 +46,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.0",
     "globals": "^15.0.0",
+    "jsdom": "^29.1.1",
     "postcss": "^8.4.0",
     "shadcn": "^4.7.0",
     "tailwindcss": "^4.3.0",

@@ -1,5 +1,7 @@
 # SmartIoT Chat
 
+Refer to [docs/qa-procedures.md](docs/qa-procedures.md) for manual QA and auditing workflows.
+
 SmartIoT Chat is a modern frontend-only rework of the legacy `react-chat`
 project. The original idea was a simple Firebase realtime chat. This version
 keeps that idea and rebuilds it with Vite, React, TypeScript, Tailwind CSS,
@@ -19,20 +21,27 @@ teams, and IoT alert rooms. It has no custom backend.
 - Editable display name.
 - CSS initials and role badges for avatars.
 - Avatar rendering uses initials or local icons only; no uploaded or remote images.
-- Upload controls are disabled by design; no files, images, blobs, or attachments are stored.
 - Responsive chat layout with room sidebar, message area, online panel, and
   mobile-friendly room navigation.
 - GitHub Pages deployment workflow.
+- Local-only attachments via IndexedDB (images: png, jpg, webp, gif;
+  documents: pdf, txt, csv, json; max 5 MB per file, 5 per message).
+- Attachment metadata stored in Firebase Realtime Database in Firebase mode.
 
 ## Explicit Non-Goals
 
 - No Firebase Storage.
-- No image uploads.
-- No file uploads.
-- No attachments.
 - No remote avatar images required.
 - No backend server.
+- No backend server.
 - No Docker.
+
+## Prerequisites
+
+- **Node.js >= 22** (the version used in CI)
+- **npm >= 10**
+
+An `.nvmrc` is provided — run `nvm use` if you use `nvm`.
 
 ## Screenshots
 
@@ -56,9 +65,11 @@ Add screenshots here after deploying or running locally:
 ## Install
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
+
+Use `npm ci` for fresh clones to match CI (it uses the lockfile). Use `npm install` if you intentionally want to update dependencies.
 
 Open the URL printed by Vite.
 
@@ -69,7 +80,10 @@ npm run dev
 npm run build
 npm run preview
 npm run lint
+npm test
 ```
+
+CI runs `lint`, `test`, and `build` before every deployment.
 
 ## Firebase Setup
 
@@ -146,6 +160,17 @@ type Message = {
   userRole: ChatUser['role']
   text: string
   createdAt: number
+  attachments?: AttachmentRef[]
+}
+
+type AttachmentRef = {
+  id: string
+  name: string
+  mimeType: string
+  size: number
+  storage: 'indexeddb'
+  localOnly: true
+  createdAt: number
 }
 ```
 
@@ -156,7 +181,7 @@ type Message = {
 - Message search.
 - Role management.
 - Better presence expiration for inactive browser tabs.
-- Lightweight automated UI tests.
+
 
 ## Legacy Rework Notes
 
